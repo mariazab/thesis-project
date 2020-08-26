@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">FitnessApp</string>
+
+    <!--- Activity Title -->
+    <string name="food_title">Food</string>
+    <string name="physical_activity_title">Physical Activity</string>
+    <string name="weekly_physical_activity_title">Weekly Physical Activity</string>
+    <string name="challenges_title">Challenges</string>
+    <string name="goals_measurement_title">Goals &amp; Measurements</string>
+
+    <!-- App-global unit strings -->
+    <string name="centimeters">cm</string>
+    <string name="kilos">kg</string>
+    <string name="kcal"><br />kcal</string>
+    <string name="minutes">mins</string>
+
+    <!-- Global error or informational messages -->
+    <string name="error_msg">Please provide valid values.</string>
+    <string name="info_btn">Information</string>
+    <string name="info_dialog_btn">Got it!</string>
+
+    <!-- Goals & Measurements list labels -->
+    <string name="goal_title">Goal</string>
+
+    <!-- Goals & Measurements functionality titles -->
+    <string name="weight_title">Weight</string>
+    <string name="bmi_title">BMI Calculator</string>
+    <string name="bmr_tee_title">BMR &amp; TEE Calculator</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+
+    <!-- BMI, BMR/TEE Calculators strings -->
+    <string name="calculate_btn">Calculate</string>
+    <string name="bmi_result_intro">Your BMI is <br /></string>
+    <string name="bmi_ranges">
+        Healthy weight: 18.5 – 24.99\nUnderweight: below 18.5\nOverweight: 24.99 – 30\nObese: over 30
+    </string>
+
+    <!-- BMI -->
+    <string name="bmi_info">Remember: BMI is only an estimate as it doesn\'t differentiate between fat and muscle!</string>
+    <string name="age">Age</string>
+
+    <string name="gender">Gender</string>
+
+    <!-- BMR/TEE -->
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="activity">Activity</string>
+    <string name="bmr_result_intro">Your BMR is <br /></string>
+    <string name="tee_result_intro">Your TEE is <br /></string>
+    <string name="bmr_tee_info">
+        Basal metabolic rate (BMR) specifies the energy we use for life functions such as brain functions, work of heart and lungs,
+        cell replacement, digestion of food and nutrients.
+        \n
+        \nTotal Energy Expenditure (TEE) is how much calories we burn each day,
+        combining BMR and physical activity. TEE represents how many calories we should consume each day, while maintaining the same weight.
+        \n
+        \nThe three physical activity levels:
+        \n- Light - people who do not engage in physical activities often and their work is not physical.
+        \n- Moderate - people who have more physical jobs or spend their free time in an active way, for example moderate activity of 1h/day.
+        \n- Vigorous - people with physical jobs and vigorous daily activities.
+    </string>
+    <string name="goal_weight">Goal weight</string>
+
+    <string name="daily_kcal">Daily calories</string>
+
+
+    <!-- Goal setting -->
+    <string name="weekly_activity_mins">Weekly activity</string>
+    <string name="save_btn">Save</string>
+    <string name="daily_kcal_no_tee_info">You can count your BMR and TEE to find out how many calories you should be consuming daily.</string>
+    <string name="daily_kcal_based_on_tee_info">Based on your TEE result.</string>
+    <string name="daily_kcal_tee_preferences_present">Your latest TEE result is <br /></string>
+    <string name="activity_mins_info">Recommended minimum is 150 mins.</string>
+    <string name="goal_preferences_saved_msg">Goal set!</string>
+    <string name="goal_info">INFORMATION WILL APPEAR HERE</string>
+
+    <string-array name="goals_measurements_list_labels">
+        <item>Goal</item>
+        <item>Weight</item>
+        <item>Body Mass Index Calculator</item>
+        <item>Basal Metabolic Rate &amp; Total Energy Expenditure Calculator</item>
+    </string-array>
+
+    <!-- TODO: Create the informational message! About weight management - how to adjust calories and about activity minutes and the intesities -->
+    <string-array name="activity_levels">
+        <item>Light</item>
+        <item>Moderate</item>
+        <item>Vigorous</item>
+    </string-array>
+    <string-array name="goal_types">
+        <item>Lose weight</item>
+        <item>Maintain weight</item>
+        <item>Gain weight</item>
+    </string-array>
+
+    <!-- Weight -->
+    <string name="no_weights_in_db">No weights saved</string>
+    <string name="date">Date</string>
+    <string name="add_weight">Add weight</string>
+    <string name="weight_saved_msg">Weight saved successfully!</string>
+    <string name="weight_save_error_msg">Error saving weight, please try again.</string>
+</resources>
+
+

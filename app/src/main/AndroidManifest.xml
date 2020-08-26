@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fi.haagahelia.android.fitnessapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".goalsmeasurements.AddWeightActivity"></activity>
+        <activity
+            android:name=".GoalsMeasurementsActivity"
+            android:label="@string/goals_measurement_title" />
+        <activity
+            android:name=".goalsmeasurements.BmrTeeActivity"
+            android:label="@string/bmr_tee_title"
+            android:parentActivityName=".GoalsMeasurementsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GoalsMeasurementsActivity" />
+        </activity>
+        <activity
+            android:name=".goalsmeasurements.BmiActivity"
+            android:label="@string/bmi_title"
+            android:parentActivityName=".GoalsMeasurementsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GoalsMeasurementsActivity" />
+        </activity>
+        <activity
+            android:name=".goalsmeasurements.WeightActivity"
+            android:label="@string/weight_title"
+            android:parentActivityName=".GoalsMeasurementsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GoalsMeasurementsActivity" />
+        </activity>
+        <activity
+            android:name=".goalsmeasurements.GoalActivity"
+            android:label="@string/goal_title"
+            android:parentActivityName=".GoalsMeasurementsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".GoalsMeasurementsActivity" />
+        </activity>
+        <activity
+            android:name=".ChallengesActivity"
+            android:label="@string/challenges_title" />
+        <activity
+            android:name=".PhysicalActivity"
+            android:label="@string/weekly_physical_activity_title" />
+        <activity android:name=".FoodActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

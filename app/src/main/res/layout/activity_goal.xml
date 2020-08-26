@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".goalsmeasurements.GoalActivity">
+
+    <LinearLayout
+        android:id="@+id/goal_type_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/goal_type_spinner"
+            android:text="@string/goal_title"/>
+
+        <Spinner
+            android:id="@+id/goal_type_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/goal_weight_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_type_container"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_weight"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/goal_weight"
+            android:hint="@string/goal_weight"
+            android:inputType="number" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kilos"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daily_kcal_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_weight_container"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_kcal"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/daily_kcal"
+            android:hint="@string/daily_kcal"
+            android:inputType="number" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kcal"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/daily_kcal_info"
+        style="@style/SecondaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/daily_kcal_container"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/weekly_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/daily_kcal_info"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/input_activity_mins"
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/weekly_activity_mins"
+            android:hint="@string/weekly_activity_mins"
+            android:inputType="number" />
+
+        <TextView
+            style="@style/MainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minutes"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/weekly_activity_info"
+        style="@style/SecondaryText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weekly_activity_container"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/activity_mins_info"
+        />
+
+    <Button
+        android:id="@+id/save_btn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/weekly_activity_info"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:text="@string/save_btn"/>
+
+    <include
+        layout="@layout/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
+

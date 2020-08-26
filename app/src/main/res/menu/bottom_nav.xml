@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_food"
+        android:icon="@drawable/ic_food"
+        android:title="@string/food_title" />
+    <item
+        android:id="@+id/nav_physical"
+        android:icon="@drawable/ic_physical_activity"
+        android:title="@string/physical_activity_title" />
+    <item
+        android:id="@+id/nav_challenges"
+        android:icon="@drawable/ic_challenges"
+        android:title="@string/challenges_title" />
+    <item
+        android:id="@+id/nav_goals_measurements"
+        android:icon="@drawable/ic_goals_measurements"
+        android:title="@string/goals_measurement_title" />
+
+</menu>
+
+
+
+
+
+
