@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/challenge_info"
+        android:title="@string/options_menu_challenge_information"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/food_journal"
+        android:title="@string/options_menu_show_food_journal"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/finish_challenge"
+        android:title="@string/options_menu_finish_challenge"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,8 +1,6 @@
 package fi.haagahelia.android.fitnessapp.goalsmeasurements;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,19 +19,17 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import fi.haagahelia.android.fitnessapp.ChallengesActivity;
-import fi.haagahelia.android.fitnessapp.FoodActivity;
+import fi.haagahelia.android.fitnessapp.Constants;
 import fi.haagahelia.android.fitnessapp.GoalsMeasurementsActivity;
-import fi.haagahelia.android.fitnessapp.PhysicalActivity;
 import fi.haagahelia.android.fitnessapp.R;
+import fi.haagahelia.android.fitnessapp.foodtracking.FoodJournalActivity;
 
 public class BmrTeeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView navigationView;
+    private BottomNavigationView navigationView;
 
     private TextView bmrResultTextView;
     private TextView teeResultTextView;
@@ -43,13 +39,15 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
     private Spinner activitySpinner;
     private String activitySelected;
     private String gender = "";
+    private TextView bmrTitleTextView;
+    private TextView teeTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bmr_tee);
 
-        navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
 
         bmrResultTextView = findViewById(R.id.bmr_result_textview);
@@ -58,6 +56,8 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
         weightEditText = findViewById(R.id.input_weight);
         ageEditText = findViewById(R.id.input_age);
         activitySpinner = findViewById(R.id.activity_spinner);
+        bmrTitleTextView = findViewById(R.id.bmr_title_textview);
+        teeTitleTextView = findViewById(R.id.tee_title_textview);
 
         //Populate the spinner list
         String[] activityItems = getResources().getStringArray(R.array.activity_levels);
@@ -102,7 +102,6 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
         }
     }
 
-
     //Calculate the BMR and TEE and show the results
     //BMR
     //For women: 655 + (9,6 × weight in kg) + (1,8 × height in cm) – (4,7 × age in years)
@@ -110,10 +109,9 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
     //TEE
     //BMR * activity
     //Light = 1.55, mod = 1.75 vig= 2.2
-    //TODO: Change Toast to popup???
     private void calculate() {
         //Toast in case of invalid values
-        Toast errorToast = Toast.makeText(this, R.string.error_msg, Toast.LENGTH_LONG);
+        Toast errorToast = Toast.makeText(this, R.string.insert_error_msg, Toast.LENGTH_LONG);
 
         String heightStr = heightEditText.getText().toString();
         String weightStr = weightEditText.getText().toString();
@@ -149,18 +147,29 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
                     break;
             }
 
-            if(gender == "female") {
+            if(gender.equals("female")) {
                 bmr = (int) (655 + (9.6 * weight) + (1.8 * height) - (4.7 * age));
-            } else if(gender == "male") {
+            } else if(gender.equals("male")) {
                 bmr = (int) (66 + (13.7 * weight) + (5 * height) - (6.8 * age));
             }
 
             tee = (int) (bmr * activityMultiplier);
 
             String kcal = getResources().getString(R.string.kcal);
+            String bmrString = bmr + kcal;
+            String teeString = tee + kcal;
 
-            bmrResultTextView.setText(bmr + " " + kcal);
-            teeResultTextView.setText(tee + " " + kcal);
+            bmrTitleTextView.setVisibility(View.VISIBLE);
+            teeTitleTextView.setVisibility(View.VISIBLE);
+
+            bmrResultTextView.setText(bmrString);
+            teeResultTextView.setText(teeString);
+
+            //For smaller screens
+            //Focus the view on the results and reset it so on next calculation it focuses also
+            teeTitleTextView.setFocusableInTouchMode(true);
+            teeTitleTextView.requestFocus();
+            teeTitleTextView.clearFocus();
 
             //Save to preferences
             saveToPreferences(tee);
@@ -169,9 +178,9 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
 
     //Method for saving the TEE value to the SharedPreferences
     private void saveToPreferences(int tee) {
-        SharedPreferences goalPreferences = getSharedPreferences(GoalActivity.GOAL_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences goalPreferences = getSharedPreferences(Constants.GOAL_PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = goalPreferences.edit();
-        editor.putInt(GoalActivity.TEE_KEY, tee);
+        editor.putInt(Constants.TEE_KEY, tee);
         editor.apply();
     }
 
@@ -188,26 +197,22 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
         int id = item.getItemId();
 
         if (id == R.id.info_btn) {
-            InfoDialogFragment fragment = new InfoDialogFragment();
-            fragment.show(getSupportFragmentManager(), "info dialog");
+            showInfoDialog();
 
         }
         return super.onOptionsItemSelected(item);
     }
 
-    //Information Dialog Fragment creation
-    public static class InfoDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(R.string.bmr_tee_info).setNeutralButton(R.string.info_dialog_btn, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+    //Method to show dialog with information
+    private void showInfoDialog() {
+        //Create an AlertDialog, set message
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.bmr_tee_info);
+        builder.setNeutralButton(R.string.info_dialog_btn, (dialogInterface, i) -> dialogInterface.dismiss());
 
-                }
-            });
-            return builder.create();
-        }
+        //Create and show the dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
@@ -233,9 +238,7 @@ public class BmrTeeActivity extends AppCompatActivity implements BottomNavigatio
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_food) {
-                startActivity(new Intent(this, FoodActivity.class));
-            } else if (itemId == R.id.nav_physical) {
-                startActivity(new Intent(this, PhysicalActivity.class));
+                startActivity(new Intent(this, FoodJournalActivity.class));
             } else if (itemId == R.id.nav_challenges) {
                 startActivity(new Intent(this, ChallengesActivity.class));
             } else if (itemId == R.id.nav_goals_measurements) {

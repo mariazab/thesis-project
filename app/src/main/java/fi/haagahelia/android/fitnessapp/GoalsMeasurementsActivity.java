@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import fi.haagahelia.android.fitnessapp.foodtracking.FoodJournalActivity;
 import fi.haagahelia.android.fitnessapp.goalsmeasurements.BmiActivity;
 import fi.haagahelia.android.fitnessapp.goalsmeasurements.BmrTeeActivity;
 import fi.haagahelia.android.fitnessapp.goalsmeasurements.GoalActivity;
@@ -17,36 +18,36 @@ import fi.haagahelia.android.fitnessapp.goalsmeasurements.WeightActivity;
 
 public class GoalsMeasurementsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView navigationView;
+    private BottomNavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goals_measurements);
 
-        navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
 
         ListView listView = findViewById(R.id.list_view);
 
         String[] listItems = getResources().getStringArray(R.array.goals_measurements_list_labels);
 
-        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItems));
+        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listItems));
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             switch (i) {
                 case 0:
                     startActivity(new Intent(GoalsMeasurementsActivity.this, GoalActivity.class));
-                    return;
+                    break;
                 case 1:
                     startActivity(new Intent(GoalsMeasurementsActivity.this, WeightActivity.class));
-                    return;
+                    break;
                 case 2:
                     startActivity(new Intent(GoalsMeasurementsActivity.this, BmiActivity.class));
-                    return;
+                    break;
                 case 3:
                     startActivity(new Intent(GoalsMeasurementsActivity.this, BmrTeeActivity.class));
-                    return;
+                    break;
             }
         });
 
@@ -75,9 +76,7 @@ public class GoalsMeasurementsActivity extends AppCompatActivity implements Bott
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_food) {
-                startActivity(new Intent(this, FoodActivity.class));
-            } else if (itemId == R.id.nav_physical) {
-                startActivity(new Intent(this, PhysicalActivity.class));
+                startActivity(new Intent(this, FoodJournalActivity.class));
             } else if (itemId == R.id.nav_challenges) {
                 startActivity(new Intent(this, ChallengesActivity.class));
             } else if (itemId == R.id.nav_goals_measurements) {

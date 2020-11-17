@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="5dp">
 
     <TextView
         android:id="@+id/date_textView"
-        style="@style/MainText"
+        style="@style/Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -15,11 +17,10 @@
 
     <TextView
         android:id="@+id/weight_textView"
-        style="@style/MainText"
+        style="@style/Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         tools:text="55 kg" />
 
 </LinearLayout>
-

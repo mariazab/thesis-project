@@ -4,188 +4,235 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".goalsmeasurements.BmrTeeActivity">
+    tools:context=".goalsmeasurements.BmrTeeActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/height_container"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_marginBottom="70dp">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/height"
-            android:id="@+id/input_height"
-            style="@style/MainText"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/centimeters"
-            style="@style/MainText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/height_container"
+                android:orientation="horizontal"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
 
-    </LinearLayout>
+                <TextView
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height_input_field"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/weight_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/height_container"
-        android:layout_margin="10dp">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/input_hint"
+                    android:autofillHints="@string/input_hint"
+                    android:id="@+id/input_height" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:hint="@string/weight"
-            android:id="@+id/input_weight"
-            style="@style/MainText"/>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/kilos"
-            style="@style/MainText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/weight_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/height_container"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
 
-    </LinearLayout>
+                <TextView
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weight_input_field"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/age_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/weight_container"
-        android:layout_margin="10dp">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/age"
-            android:id="@+id/input_age"
-            style="@style/MainText"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/input_hint"
+                    android:autofillHints="@string/input_hint"
+                    android:id="@+id/input_weight" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/gender_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/age_container"
-        android:layout_margin="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/age_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/weight_container"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gender"
-            style="@style/MainText"/>
+                <TextView
+                    style="@style/Body1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age_input_field"/>
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="@string/input_hint"
+                    android:autofillHints="@string/input_hint"
+                    android:id="@+id/input_age" />
 
-            <RadioButton
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/gender_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/age_container"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_input_field"
+                    style="@style/Body1"/>
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender_female"
+                        android:id="@+id/gender_female"
+                        android:onClick="onRadioBtnClicked"
+                        style="@style/Body1"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gender_male"
+                        android:id="@+id/gender_male"
+                        android:onClick="onRadioBtnClicked"
+                        style="@style/Body1"/>
+
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/gender_container"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_input_field"
+                    style="@style/Body1"/>
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/activity_spinner"/>
+
+            </LinearLayout>
+
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/gender_male"
-                android:id="@+id/gender_male"
-                android:onClick="onRadioBtnClicked"
-                style="@style/MainText"/>
+                android:text="@string/calculate_btn"
+                android:layout_below="@id/activity_container"
+                android:id="@+id/calculate_btn"
+                style="@style/ButtonPrimary"
+                android:layout_margin="15dp"
+                android:paddingHorizontal="10dp"
+                android:layout_centerHorizontal="true"/>
 
-            <RadioButton
+            <LinearLayout
                 android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content"
-                android:text="@string/gender_female"
-                android:id="@+id/gender_female"
-                android:onClick="onRadioBtnClicked"
-                style="@style/MainText"/>
+                android:id="@+id/bmr_result_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/calculate_btn"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
 
-        </RadioGroup>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bmr_result_intro"
+                    android:id="@+id/bmr_title_textview"
+                    android:visibility="invisible"
+                    style="@style/Headline5"/>
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="23.3"
+                    android:id="@+id/bmr_result_textview"
+                    style="@style/Headline5"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activity_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/gender_container"
-        android:layout_margin="10dp">
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity"
-            style="@style/MainText"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:id="@+id/tee_result_container"
+                android:orientation="horizontal"
+                android:layout_below="@id/bmr_result_container"
+                android:layout_margin="10dp"
+                android:paddingHorizontal="20dp">
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_spinner"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tee_title_textview"
+                    android:text="@string/tee_result_intro"
+                    android:visibility="invisible"
+                    style="@style/Headline5"/>
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="23.3"
+                    android:id="@+id/tee_result_textview"
+                    style="@style/Headline5"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calculate_btn"
-        android:layout_below="@id/activity_container"
-        android:id="@+id/calculate_btn"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_margin="15dp"
-        android:layout_centerHorizontal="true"/>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bmr_result_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/calculate_btn"
-        android:layout_margin="15dp">
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bmr_result_intro"
-            style="@style/MainText"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="23.3"
-            android:id="@+id/bmr_result_textview"
-            style="@style/MainText"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tee_result_container"
-        android:orientation="horizontal"
-        android:layout_below="@id/bmr_result_container"
-        android:layout_margin="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tee_result_intro"
-            style="@style/MainText"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="23.3"
-            android:id="@+id/tee_result_textview"
-            style="@style/MainText"/>
-
-    </LinearLayout>
+    </ScrollView>
 
     <include
         layout="@layout/bottom_nav"

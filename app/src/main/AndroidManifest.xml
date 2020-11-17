@@ -8,8 +8,60 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".goalsmeasurements.AddWeightActivity"></activity>
+        android:theme="@style/AppTheme"
+        >
+        <activity
+            android:name=".activitytracking.AddActivityActivity"
+            android:label="@string/add_activity"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".challenges.ChallengeDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".challenges.ChallengeDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".foodtracking.EditFoodActivity"
+            android:label="@string/edit_food"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".foodtracking.FoodJournalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".foodtracking.FoodJournalActivity" />
+        </activity>
+        <activity
+            android:name=".foodtracking.AddFoodActivity"
+            android:label="@string/add_food_title"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".challenges.ChallengeDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".challenges.ChallengeDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".challenges.EditChallengeActivity"
+            android:label="@string/edit_challenge_title"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".challenges.ChallengeDetailsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".challenges.ChallengeDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".challenges.ChallengeDetailsActivity"
+            android:parentActivityName=".ChallengesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChallengesActivity" />
+        </activity>
+        <activity
+            android:name=".challenges.AddChallengeActivity"
+            android:label="@string/add_challenge_title"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".ChallengesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChallengesActivity" />
+        </activity>
         <activity
             android:name=".GoalsMeasurementsActivity"
             android:label="@string/goals_measurement_title" />
@@ -38,6 +90,15 @@
                 android:value=".GoalsMeasurementsActivity" />
         </activity>
         <activity
+            android:name=".goalsmeasurements.AddWeightActivity"
+            android:label="@string/add_weight"
+            android:theme="@style/AddEditTheme"
+            android:parentActivityName=".goalsmeasurements.WeightActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".goalsmeasurements.WeightActivity" />
+        </activity>
+        <activity
             android:name=".goalsmeasurements.GoalActivity"
             android:label="@string/goal_title"
             android:parentActivityName=".GoalsMeasurementsActivity">
@@ -45,19 +106,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GoalsMeasurementsActivity" />
         </activity>
-        <activity
-            android:name=".ChallengesActivity"
-            android:label="@string/challenges_title" />
-        <activity
-            android:name=".PhysicalActivity"
-            android:label="@string/weekly_physical_activity_title" />
-        <activity android:name=".FoodActivity">
+        <activity android:name=".ChallengesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".foodtracking.FoodJournalActivity">
+
+        </activity>
+
+        <receiver android:name=".AlarmReceiver" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

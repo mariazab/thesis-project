@@ -2,6 +2,7 @@ package fi.haagahelia.android.fitnessapp.db;
 
 import java.util.Date;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,6 +10,7 @@ import androidx.room.PrimaryKey;
 public class Weight {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "weight_id")
     private long id;
 
     private Date date;

@@ -3,6 +3,7 @@ package fi.haagahelia.android.fitnessapp.goalsmeasurements;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,18 +16,18 @@ import java.text.DecimalFormat;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import fi.haagahelia.android.fitnessapp.ChallengesActivity;
-import fi.haagahelia.android.fitnessapp.FoodActivity;
 import fi.haagahelia.android.fitnessapp.GoalsMeasurementsActivity;
-import fi.haagahelia.android.fitnessapp.PhysicalActivity;
 import fi.haagahelia.android.fitnessapp.R;
+import fi.haagahelia.android.fitnessapp.foodtracking.FoodJournalActivity;
 
 public class BmiActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView navigationView;
+    private BottomNavigationView navigationView;
 
     private TextView resultTextView;
     private EditText heightEditText;
     private EditText weightEditText;
+    private TextView bmiTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,9 @@ public class BmiActivity extends AppCompatActivity implements BottomNavigationVi
         resultTextView = findViewById(R.id.result_textview);
         heightEditText = findViewById(R.id.input_height);
         weightEditText = findViewById(R.id.input_weight);
+        bmiTitleTextView = findViewById(R.id.bmi_title_textview);
 
-        navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
 
         Button calculateBtn = findViewById(R.id.calculate_btn);
@@ -48,7 +50,7 @@ public class BmiActivity extends AppCompatActivity implements BottomNavigationVi
 
     private void calculateBmi(){
         //Toast in case of invalid values
-        Toast errorToast = Toast.makeText(this, R.string.error_msg, Toast.LENGTH_LONG);
+        Toast errorToast = Toast.makeText(this, R.string.insert_error_msg, Toast.LENGTH_LONG);
         String heightStr = heightEditText.getText().toString();
         String weightStr = weightEditText.getText().toString();
 
@@ -66,6 +68,7 @@ public class BmiActivity extends AppCompatActivity implements BottomNavigationVi
             double bmi = weight / (height * height);
             DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
+            bmiTitleTextView.setVisibility(View.VISIBLE);
             resultTextView.setText(decimalFormat.format(bmi));
 
         }
@@ -94,9 +97,7 @@ public class BmiActivity extends AppCompatActivity implements BottomNavigationVi
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_food) {
-                startActivity(new Intent(this, FoodActivity.class));
-            } else if (itemId == R.id.nav_physical) {
-                startActivity(new Intent(this, PhysicalActivity.class));
+                startActivity(new Intent(this, FoodJournalActivity.class));
             } else if (itemId == R.id.nav_challenges) {
                 startActivity(new Intent(this, ChallengesActivity.class));
             } else if (itemId == R.id.nav_goals_measurements) {

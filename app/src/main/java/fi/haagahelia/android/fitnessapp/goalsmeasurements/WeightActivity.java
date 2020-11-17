@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -14,11 +15,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.PointsGraphSeries;
-import com.jjoe64.graphview.series.Series;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,49 +25,59 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import fi.haagahelia.android.fitnessapp.ChallengesActivity;
-import fi.haagahelia.android.fitnessapp.FoodActivity;
+import fi.haagahelia.android.fitnessapp.Constants;
 import fi.haagahelia.android.fitnessapp.GoalsMeasurementsActivity;
-import fi.haagahelia.android.fitnessapp.PhysicalActivity;
+import fi.haagahelia.android.fitnessapp.HelperMethods;
 import fi.haagahelia.android.fitnessapp.R;
 import fi.haagahelia.android.fitnessapp.db.Weight;
-import fi.haagahelia.android.fitnessapp.db.WeightViewModel;
+import fi.haagahelia.android.fitnessapp.foodtracking.FoodJournalActivity;
 
-public class WeightActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class WeightActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, WeightListAdapter.OnItemListener {
 
-    BottomNavigationView navigationView;
-
-    public static final int NEW_WEIGHT_ACTIVITY_REQUEST_CODE = 1;
+    private BottomNavigationView navigationView;
 
     private WeightViewModel weightViewModel;
 
     //Graph
-    GraphView graph;
-    LineGraphSeries<DataPoint> lineSeries;
-    PointsGraphSeries<DataPoint> pointSeries;
+    private GraphView graph;
+    private LineGraphSeries<DataPoint> lineSeries;
+    private PointsGraphSeries<DataPoint> pointSeries;
+
+    //Goal type
+    private String goalType;
+    private boolean isGoalSet;
+    private double goalWeight;
 
     //Min and max values for graph boundaries
-    Date maxX;
-    Date minX;
-    double maxY;
-    double minY;
+    private Date maxX;
+    private Date minX;
+    private double maxY;
+    private double minY;
 
-    //TODO: lower than goal weight entry? WHAT THEN?
-    //TODO: Empty view, for when there is no weight
+    private List<Weight> weightList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weight);
 
-        navigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
 
+        //Variable for the empty view
+        View emptyView = findViewById(R.id.empty_view);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        final WeightListAdapter adapter = new WeightListAdapter(this);
+        final WeightListAdapter adapter = new WeightListAdapter(this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        //Add the divider to the list
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         //Assign placeholder data to the graph, before the actual data is received by observer
         graph = findViewById(R.id.graph);
@@ -82,7 +90,6 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
         graph.addSeries(lineSeries);
         graph.addSeries(pointSeries);
 
-        //TODO: Check if that can be done differently, in layout for example
         //Set the style of graph
         pointSeries.setSize(12f);
         //Primary color
@@ -90,45 +97,66 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
         //Accent color
         pointSeries.setColor(Color.rgb(205, 220, 57));
 
+        Toast toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
+
         //After tapping the point in the graph, show a toast with details
-        pointSeries.setOnDataPointTapListener(new OnDataPointTapListener() {
-            @Override
-            public void onTap(Series series, DataPointInterface dataPoint) {
-                Calendar c = Calendar.getInstance();
-                long l = (long) dataPoint.getX();
-                c.setTimeInMillis(l);
-                Date d = c.getTime();
-                String date = c.get(Calendar.DAY_OF_MONTH) + ".";
-                int month = c.get(Calendar.MONTH) + 1;
+        pointSeries.setOnDataPointTapListener((series, dataPoint) -> {
+            Calendar c = Calendar.getInstance();
+            long l = (long) dataPoint.getX();
+            c.setTimeInMillis(l);
+            String date = HelperMethods.getDateInStringFormat(c);
 
-                if (month < 10) {
-                    date += "0";
-                }
-                date += month + "." + c.get(Calendar.YEAR);
+            toast.setText(dataPoint.getY() + " kg on " + date);
+            toast.show();
 
-                Toast.makeText(getApplicationContext(), dataPoint.getY() + " kg on " + date, Toast.LENGTH_LONG).show();
-            }
         });
 
         weightViewModel = new ViewModelProvider(this).get(WeightViewModel.class);
 
         weightViewModel.getAllWeights().observe(this, weights -> {
+            weightList = weights;
             adapter.setWeights(weights);
-            setGraphData();
-        });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(WeightActivity.this, AddWeightActivity.class);
-                startActivityForResult(intent, NEW_WEIGHT_ACTIVITY_REQUEST_CODE);
+            //Reset the data in the graph series with the data from db
+            lineSeries.resetData(getDataPointsFromDb());
+            pointSeries.resetData(getDataPointsFromDb());
+            graph.onDataChanged(true,true);
+
+            //Format the graph
+            formatGraph();
+
+            //If there is no items in the adapter, show the empty view and hide the graph
+            if(adapter.getItemCount() == 0) {
+                emptyView.setVisibility(View.VISIBLE);
+                graph.setVisibility(View.INVISIBLE);
+            } else {
+                emptyView.setVisibility(View.GONE);
+                graph.setVisibility(View.VISIBLE);
             }
         });
 
-        //Get the goal weight from SharedPreferences and assign it to the minY, to set the boundary
-        SharedPreferences preferences = getSharedPreferences(GoalActivity.GOAL_PREFERENCE_NAME, Context.MODE_PRIVATE);
-        minY = preferences.getInt(GoalActivity.GOAL_WEIGHT_KEY, 0);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(WeightActivity.this, AddWeightActivity.class);
+            startActivityForResult(intent, Constants.NEW_WEIGHT_ACTIVITY_REQUEST_CODE);
+        });
+
+        //Get the goal type from SharedPreferences and based on it assign the goal weight to minY or maxY, to set the boundary
+        SharedPreferences preferences = getSharedPreferences(Constants.GOAL_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        if(preferences.contains(Constants.GOAL_TYPE_KEY)) {
+            isGoalSet = true;
+            goalType = preferences.getString(Constants.GOAL_TYPE_KEY, Constants.LOSE_WEIGHT_GOAL);
+            if(TextUtils.equals(goalType, Constants.LOSE_WEIGHT_GOAL)) {
+                goalWeight = preferences.getFloat(Constants.GOAL_WEIGHT_KEY, 0);
+                minY = goalWeight;
+            } else if (TextUtils.equals(goalType, Constants.GAIN_WEIGHT_GOAL)) {
+                goalWeight = preferences.getFloat(Constants.GOAL_WEIGHT_KEY, 0);
+                maxY = goalWeight;
+            }
+        } else {
+            isGoalSet = false;
+
+        }
 
     }
 
@@ -137,37 +165,69 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
 
         String msg;
 
-        if (requestCode == NEW_WEIGHT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == Constants.NEW_WEIGHT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 
-            //Get the data from the intent
-            double weightValue = Double.parseDouble(data.getStringExtra(AddWeightActivity.EXTRA_REPLY_WEIGHT));
-            int year = data.getIntExtra(AddWeightActivity.EXTRA_REPLY_DATE_YEAR, 0);
-            int month = data.getIntExtra(AddWeightActivity.EXTRA_REPLY_DATE_MONTH, 0);
-            int day = data.getIntExtra(AddWeightActivity.EXTRA_REPLY_DATE_DAY, 0);
+            String operationType = data.getStringExtra(Constants.OPERATION_TYPE);
 
-            //Insert new weight to the db
-            Calendar c = Calendar.getInstance();
-            c.set(year, month, day);
-            Date date = c.getTime();
-            Weight weight = new Weight(date, weightValue);
-            weightViewModel.insert(weight);
+            //If operation type is delete, delete the row and set an appropriate message
+            if(operationType.equals(Constants.OPERATION_DELETE)) {
+                long id = data.getLongExtra(Constants.WEIGHT_ID, 0);
+                weightViewModel.deleteById(id);
+                msg = getString(R.string.delete_success_msg);
+            } else {
+                //Get the data from the intent
+                double weightValue = Double.parseDouble(data.getStringExtra(Constants.WEIGHT));
+                int year = data.getIntExtra(Constants.DATE_YEAR, 0);
+                int month = data.getIntExtra(Constants.DATE_MONTH, 0);
+                int day = data.getIntExtra(Constants.DATE_DAY, 0);
 
-            msg = getResources().getString(R.string.weight_saved_msg);
+                //Create the date object from data
+                Calendar c = Calendar.getInstance();
+                c.set(year, month, day);
+                Date date = c.getTime();
 
-        } else {
-            msg = getResources().getString(R.string.weight_save_error_msg);
+                //Check if updating existing row,
+                //Otherwise, insert new row
+                if(operationType.equals(Constants.OPERATION_UPDATE)) {
+                    long id = data.getLongExtra(Constants.WEIGHT_ID, 0);
+                    weightViewModel.update(id, date, weightValue);
+                    msg = getString(R.string.edit_success_msg);
+                } else {
+                    Weight weight = new Weight(date, weightValue);
+                    weightViewModel.insert(weight);
+                    msg = getResources().getString(R.string.save_success_msg);
+                }
+            }
+
+        }
+        else {
+            msg = getResources().getString(R.string.error_msg);
         }
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
     }
 
-    //Reset the data in the graph series with the data from db
-    private void setGraphData() {
-        lineSeries.resetData(getDataPointsFromDb());
-        pointSeries.resetData(getDataPointsFromDb());
-        graph.onDataChanged(true,true);
+    @Override
+    public void onItemClick(int position) {
+        List<Weight> weights = weightList;
+        Weight weight = weights.get(position);
 
-        //Format the labels
+        Intent intent = new Intent(WeightActivity.this, AddWeightActivity.class);
+        intent.putExtra(Constants.WEIGHT_ID, weight.getId());
+        intent.putExtra(Constants.WEIGHT, weight.getWeight());
 
+        Calendar c = Calendar.getInstance();
+        Date date = weight.getDate();
+        c.setTime(date);
+        intent.putExtra(Constants.DATE_YEAR, c.get(Calendar.YEAR));
+        intent.putExtra(Constants.DATE_MONTH, c.get(Calendar.MONTH));
+        intent.putExtra(Constants.DATE_DAY, c.get(Calendar.DAY_OF_MONTH));
+
+        startActivityForResult(intent, Constants.NEW_WEIGHT_ACTIVITY_REQUEST_CODE);
+    }
+
+    //Format the labels and boundaries
+    private void formatGraph() {
         //Set date label formatter
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this));
         //Set the number of horizontal labels to 2 to avoid overlapping
@@ -183,23 +243,20 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
         graph.getViewport().setMinX(minX.getTime());
         graph.getViewport().setMaxX(maxX.getTime());
 
-        //enable horizontal scrolling
-        graph.getViewport().setScrollable(true);
-
         //disable rounding of labels, because of date labels
         graph.getGridLabelRenderer().setHumanRounding(false);
         //set vertical label width, so that whole labels fit in view
         graph.getGridLabelRenderer().setLabelVerticalWidth(90);
     }
 
-    //TODO: highest and lowest values for the graph boundaries: not doing it programatically, but maybe to create a query in the database for getting directly those values.
     //Method for creating graph data from the database
     private DataPoint[] getDataPointsFromDb() {
-        List<Weight> weightsInDb = weightViewModel.getAllWeights().getValue();
+        List<Weight> weightsInDb = weightList;
 
         DataPoint[] data = new DataPoint[weightsInDb.size()];
 
         double maxWeight = 0;
+        double minWeight = 1000;
 
         //Date needs to have initial value for comparison purposes
         Calendar calendar = Calendar.getInstance();
@@ -214,7 +271,7 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
         Date minDate = calendar.getTime();
 
         if(!weightsInDb.isEmpty()) {
-            for(int i = 0; i < weightsInDb.size(); i++) {
+            for (int i = 0; i < weightsInDb.size(); i++) {
                 Weight weight = weightsInDb.get(i);
                 double weightValue = weight.getWeight();
                 Date weightDate = weight.getDate();
@@ -223,12 +280,17 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
                 data[i] = d;
 
                 //Find the max weight
-                if(weightValue > maxWeight) {
+                if (weightValue > maxWeight) {
                     maxWeight = weightValue;
                 }
 
+                //Find the min weight
+                if (weightValue < minWeight) {
+                    minWeight = weightValue;
+                }
+
                 //Find the max date
-                if(weightDate.after(maxDate)) {
+                if (weightDate.after(maxDate)) {
                     maxDate = weightDate;
                 }
 
@@ -238,7 +300,28 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
                 }
             }
         }
-        maxY = maxWeight;
+
+        //Based on the goalType, set the appropriate values as the boundaries
+        if(TextUtils.equals(goalType, "Lose weight")) {
+            maxY = maxWeight;
+            //Check if min weight is not smaller than goal weight
+            if(minWeight < goalWeight) {
+                //If it is set the minY boundary to the minWeight
+                minY = minWeight;
+            }
+        } else if (TextUtils.equals(goalType, "Gain weight")) {
+            minY = minWeight;
+            //Check if the max weight is not bigger than goal weight
+            if(maxWeight > goalWeight) {
+                //If so, set the maxY boundary to the maxweight
+                maxY = maxWeight;
+            }
+        } else if (TextUtils.equals(goalType, "Maintain weight") || !isGoalSet) {
+            maxY = maxWeight;
+            minY = minWeight;
+        }
+
+        //Setting the date boundaries
         maxX = maxDate;
         minX = minDate;
 
@@ -268,9 +351,7 @@ public class WeightActivity extends AppCompatActivity implements BottomNavigatio
         navigationView.postDelayed(() -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_food) {
-                startActivity(new Intent(this, FoodActivity.class));
-            } else if (itemId == R.id.nav_physical) {
-                startActivity(new Intent(this, PhysicalActivity.class));
+                startActivity(new Intent(this, FoodJournalActivity.class));
             } else if (itemId == R.id.nav_challenges) {
                 startActivity(new Intent(this, ChallengesActivity.class));
             } else if (itemId == R.id.nav_goals_measurements) {

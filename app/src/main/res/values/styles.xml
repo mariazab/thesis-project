@@ -5,6 +5,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="font">@font/roboto</item>
+    </style>
+
+    <!-- Style for edit/add app bar screen -->
+    <style name="AddEditTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarker</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="font">@font/roboto</item>
     </style>
 
     <style name="BottomNav">
@@ -21,6 +32,132 @@
     <style name="SecondaryText">
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+        <style name="Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">102sp</item>
+        </style>
+        <style name="Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">64sp</item>
+        </style>
+        <style name="Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">51sp</item>
+        </style>
+        <style name="Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">36sp</item>
+        </style>
+        <style name="Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">25sp</item>
+        </style>
+        <style name="Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">21sp</item>
+        </style>
+        <style name="Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">17sp</item>
+        </style>
+        <style name="Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+            <item name="fontFamily">@font/nunito</item>
+            <item name="android:fontFamily">@font/nunito</item>
+            <item name="android:textSize">15sp</item>
+        </style>
+        <style name="Body1" parent="TextAppearance.MaterialComponents.Body2">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">17sp</item>
+        </style>
+        <style name="Body2" parent="TextAppearance.MaterialComponents.Body2">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">15sp</item>
+        </style>
+        <style name="ButtonPrimary" parent="TextAppearance.MaterialComponents.Button">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">15sp</item>
+            <item name="android:background">@color/colorAccent</item>
+            <item name="android:textColor">@color/colorWhite</item>
+        </style>
+
+    <style name="ButtonSecondary" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+        <style name="ButtonWarning" parent="TextAppearance.MaterialComponents.Button">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">15sp</item>
+            <item name="android:background">@color/colorWarning</item>
+            <item name="android:textColor">@color/colorWhite</item>
+        </style>
+
+        <style name="Caption" parent="TextAppearance.MaterialComponents.Caption">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">13sp</item>
+        </style>
+        <style name="Overline" parent="TextAppearance.MaterialComponents.Overline">
+            <item name="fontFamily">@font/roboto</item>
+            <item name="android:fontFamily">@font/roboto</item>
+            <item name="android:textSize">11sp</item>
+        </style>
+
+    <style name="CaldroidTheme" parent="CaldroidDefault">
+        <item name="styleCaldroidViewLayout">@style/CaldroidDefaultCalendarViewLayout</item>
+        <item name="styleCaldroidLeftArrow">@style/CaldroidDefaultLeftButton</item>
+        <item name="styleCaldroidRightArrow">@style/CaldroidDefaultRightButton</item>
+        <item name="styleCaldroidMonthName">@style/CaldroidDefaultMonthName</item>
+        <item name="styleCaldroidGridView">@style/CaldroidDefaultGridView</item>
+        <item name="styleCaldroidNormalCell">@style/CaldroidDefaultNormalCell</item>
+        <item name="styleCaldroidSquareCell">@style/CaldroidDefaultSquareCell</item>
+        <item name="styleCaldroidWeekdayView">@style/CaldroidDefaultWeekday</item>
+    </style>
+
+    <style name="CaldroidDefaultLeftButton" parent="CaldroidDefaultArrowButton">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:background">@drawable/ic_arrow_left_accent</item>
+    </style>
+
+    <style name="CaldroidDefaultRightButton" parent="CaldroidDefaultArrowButton">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@drawable/ic_arrow_right_accent</item>
+    </style>
+
+    <style name="CaldroidDefaultGridView">
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:listSelector">@null</item>
+        <item name="android:background">@color/caldroid_lighter_gray</item>
+        <item name="android:horizontalSpacing">1dp</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:verticalSpacing">1dp</item>
+        <item name="font">@font/nunito</item>
+        <item name="fontFamily">@font/nunito</item>
+    </style>
+
+    <style name="CaldroidDefaultWeekday">
+        <item name="android:textColor">@color/colorSubtitleText</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="font">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 
 </resources>

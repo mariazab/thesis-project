@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">FitnessApp</string>
+    <string name="app_name">Challenge Your Health</string>
 
-    <!--- Activity Title -->
-    <string name="food_title">Food</string>
+    <!--- Activity Titles -->
+    <string name="food_title">Food Journal</string>
     <string name="physical_activity_title">Physical Activity</string>
     <string name="weekly_physical_activity_title">Weekly Physical Activity</string>
     <string name="challenges_title">Challenges</string>
@@ -11,13 +11,65 @@
     <!-- App-global unit strings -->
     <string name="centimeters">cm</string>
     <string name="kilos">kg</string>
-    <string name="kcal"><br />kcal</string>
+    <string name="kcal"><br /> kcal</string>
     <string name="minutes">mins</string>
+    <string name="activity_mins"><br/> mins</string>
 
-    <!-- Global error or informational messages -->
-    <string name="error_msg">Please provide valid values.</string>
+    <!-- Global strings -->
     <string name="info_btn">Information</string>
     <string name="info_dialog_btn">Got it!</string>
+    <string name="delete_btn">Delete</string>
+    <string name="delete_dialog_msg">Are you sure to want to delete?</string>
+    <string name="delete_dialog_submsg">This action cannot be reversed.</string>
+    <string name="delete_challenge_dialog_submsg">You are deleting the challenge from the database, this action cannot be reversed.
+                                                    \n\nIf you want to finish the challenge, choose the option from the menu in the challenge screen.</string>
+    <string name="yes">Yes</string>
+    <string name="ok_btn">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_btn">Save</string>
+
+    <!-- Input fields titles -->
+    <string name="goal_input_title">Goal:</string>
+    <string name="goal_weight_input_title">Goal weight (kg):</string>
+    <string name="daily_kcal_input_title">Daily calories:</string>
+    <string name="weeekly_activity_input_title">Weekly activity (mins):</string>
+    <string name="weight_input_field">Weight (kg):</string>
+    <string name="height_input_field">Height (cm):</string>
+    <string name="age_input_field">Age:</string>
+    <string name="gender_input_field">Gender:</string>
+    <string name="activity_input_field">Activity:</string>
+    <string name="date_input_title">Date:</string>
+    <string name="name_input_title">Name:</string>
+    <string name="duration_input_title">Duration:</string>
+    <string name="intensity_input_title">Intensity:</string>
+    <string name="challenge_name_input_title">Challenge name:</string>
+    <string name="challenge_description_input_title">Challenge description:</string>
+    <string name="frequency_input_title">Frequency:</string>
+    <string name="size_input_title">Size (g):</string>
+    <string name="calories_input_title">Calories (per 100g):</string>
+    <string name="carbs_input_title">Carbs (per 100g):</string>
+    <string name="protein_input_title">Protein (per 100g):</string>
+    <string name="fat_input_title">Fat (per 100g):</string>
+    <string name="saturated_fat_input_title">Saturated Fat (per 100g):</string>
+    <string name="trans_fat_input_title">Trans-fat (per 100g):</string>
+    <string name="sugar_input_title">Sugar (per 100g):</string>
+    <string name="salt_input_title">Salt (per 100g):</string>
+    <string name="fruit_or_veggie_input_title">Fruit or veggie?</string>
+
+    <!-- Input fields hints -->
+    <string name="input_hint">Type here</string>
+    <string name="date_input_hint">Choose date</string>
+    <string name="duration_input_hint">Choose duration</string>
+
+    <!-- Toast messages -->
+    <string name="challenge_started_msg">Challenge started!</string>
+    <string name="insert_error_msg">Please provide valid values.</string>
+    <string name="food_insert_error_msg">Please provide at least name and grams.</string>
+    <string name="challenge_insert_error_msg">Please provide at least name and frequency.</string>
+    <string name="error_msg">Error, please try again.</string>
+    <string name="edit_success_msg">Edit successful!</string>
+    <string name="delete_success_msg">Delete successful!</string>
+    <string name="save_success_msg">Save successful!</string>
 
     <!-- Goals & Measurements list labels -->
     <string name="goal_title">Goal</string>
@@ -26,26 +78,20 @@
     <string name="weight_title">Weight</string>
     <string name="bmi_title">BMI Calculator</string>
     <string name="bmr_tee_title">BMR &amp; TEE Calculator</string>
-    <string name="height">Height</string>
-    <string name="weight">Weight</string>
 
     <!-- BMI, BMR/TEE Calculators strings -->
     <string name="calculate_btn">Calculate</string>
     <string name="bmi_result_intro">Your BMI is <br /></string>
     <string name="bmi_ranges">
-        Healthy weight: 18.5 – 24.99\nUnderweight: below 18.5\nOverweight: 24.99 – 30\nObese: over 30
+        Healthy weight BMI range: 18.5 – 24.99\n\nUnderweight: below 18.5\n\nOverweight: 24.99 – 30\n\nObese: over 30
     </string>
 
     <!-- BMI -->
     <string name="bmi_info">Remember: BMI is only an estimate as it doesn\'t differentiate between fat and muscle!</string>
-    <string name="age">Age</string>
-
-    <string name="gender">Gender</string>
 
     <!-- BMR/TEE -->
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
-    <string name="activity">Activity</string>
     <string name="bmr_result_intro">Your BMR is <br /></string>
     <string name="tee_result_intro">Your TEE is <br /></string>
     <string name="bmr_tee_info">
@@ -62,44 +108,199 @@
     </string>
     <string name="goal_weight">Goal weight</string>
 
-    <string name="daily_kcal">Daily calories</string>
-
-
     <!-- Goal setting -->
     <string name="weekly_activity_mins">Weekly activity</string>
-    <string name="save_btn">Save</string>
     <string name="daily_kcal_no_tee_info">You can count your BMR and TEE to find out how many calories you should be consuming daily.</string>
     <string name="daily_kcal_based_on_tee_info">Based on your TEE result.</string>
     <string name="daily_kcal_tee_preferences_present">Your latest TEE result is <br /></string>
     <string name="activity_mins_info">Recommended minimum is 150 mins.</string>
     <string name="goal_preferences_saved_msg">Goal set!</string>
-    <string name="goal_info">INFORMATION WILL APPEAR HERE</string>
+    <string name="goal_info">It is important to consume an appropriate number of calories – energy intake should be more and less the same as calorie expenditure,
+        in order to maintain a healthy weight. BMI can be used as an indication and estimation of a healthy weight.
+        \n\nWhen losing or gaining weight, it is important to adjust the daily calorie intake.
+        The recommended weight loss per week is around 0.5 – 1 kg. To lose weight, you need to achieve a calorie deficit, so eat less calories than your body burns.
+        There is around 7000 calories in one kilogram of fat. So you need to adjust the calorie intake by 3500 – 7000 calories per week or 500 – 1000 calories per day from the Total Energy Expenditure.
+        The same is for weight gain, except that you need to eat more calories than you burn.
+        \n\nIn case of weekly physical activity, for an adult, the recommended minimum is 150 minutes of moderate intensity.
+        Physical activity means moving in any way that is using up energy, for example walking, running, cycling, dancing, yoga etc.
+        The best way to keep active is to incorporate more movement into the daily life, for example, using stairs instead of lift, walking to work or doing more household work.
+        It is important to adjust the exercises to our fitness level. Moderate intense activity is a type of activity that increases heart rate and makes it a bit harder to breath and talk.
+        It is also important to work on muscles 2 times per week. Adults over 65 should engage in physical activities that are allowed based on their condition.
+        The recommended goal of physical activity per day for children is at least 60 minutes of moderate activity.
+    </string>
+    <string name="no_weights_in_db">No weights saved</string>
+    <string name="add_weight">Add weight</string>
 
+    <!-- Weight -->
+    <string name="edit_weight">Edit Weight</string>
+    <string name="weight_empty_view_subtitle">Add weight measurement by clicking the add button</string>
+    <string name="weight_empty_view_title">No records yet</string>
+
+    <!--Challenges -->
+    <string name="challenges_active">Active</string>
+    <string name="challenges_completed">Finished</string>
+    <string name="days_complete"><br /> days completed</string>
+    <string name="weeks_complete"><br /> weeks completed</string>
+    <string name="add_challenge_title">Add new challenge</string>
+    <string name="challenge_name">Challenge Name</string>
+    <string name="challenge_description">Challenge Description</string>
+    <string name="challenge_list_text">You can choose a challenge from the list:</string>
+    <string name="start_challenge">Start challenge</string>
+
+    <string name="active_challenges_empty_view_subtitle">Start a challenge by clicking the add button.</string>
+    <string name="active_challenges_empty_view_title">You have not started any challenges yet.</string>
+    <string name="completed_challenges_empty_view_subtitle">You can mark a challenge as finished by choosing the option in the menu of in the challenge details view.</string>
+    <string name="completed_challenges_empty_view_title">You have not finished any challenges yet.</string>
+
+    <string name="completed_days">Completed days: <br /></string>
+    <string name="completed_weeks">Completed weeks: <br /></string>
+    <string name="do_you_want_to_complete">Do you want to finish \"</string>
+    <string name="challenge_question_mark">\" challenge?</string>
+    <string name="edit_challenge_title">Edit challenge</string>
+
+    <!-- Challenge details menu option -->
+    <string name="options_menu_challenge_information">Challenge information</string>
+    <string name="options_menu_edit_challenge">Edit challenge</string>
+    <string name="options_menu_finish_challenge">Finish challenge</string>
+    <string name="options_menu_show_food_journal">Show food journal</string>
+    <string name="complete_challenge_dialog_title">Complete Challenge</string>
+
+    <string name="challenge_already_was_completed">You have already finished this challenge before.</string>
+
+    <string name="challenge_info">Here will be additional information about the challenge.</string>
+    <string name="more_btn">more</string>
+    <string name="add_food_title">Add food</string>
+    <string name="edit_food">Edit food</string>
+    <string name="food_item_list_btn">Choose from list:</string>
+    <string name="add_activity">Add Activity</string>
+
+    <!-- Notification -->
+    <string name="challenges_notification_title">Did you update your challenges?</string>
+    <string name="challenge_notification_msg">Don\'t forget to mark your progress!</string>
+
+
+    <!-- Food item details in the list -->
+    <string name="food_item_details_start">\n(</string>
+    <string name="food_item_details_comma">, <br /></string>
+    <string name="food_item_details_kcal">kcal: <br /></string>
+    <string name="food_item_details_carbs">carbs: <br /></string>
+    <string name="food_item_details_protein">protein: <br /></string>
+    <string name="food_item_details_fat">fat: <br /></string>
+    <string name="food_item_details_end">)</string>
+
+    <string name="total_kcal">Total kcal: <br/></string>
+    <string name="total_carbs">Total carbs: <br/></string>
+    <string name="percent">%</string>
+    <string name="total_protein">Total protein: <br/></string>
+    <string name="total_fat">Total fat: <br/></string>
+    <string name="food_journal_empty_view_title">You haven\'t added any food items yet.</string>
+    <string name="total_minutes">Total minutes: <br/></string>
+    <string name="food_journal_empty_view_subtitle">Food for the current day can be added from specific challenges.</string>
+    <string name="activity_empty_view_title">You haven\'t added any items yet.</string>
+    <string name="activity_empty_view_subtitle">Add activities by clicking the button above.</string>
+    <string name="total_percent">Total %: <br/></string>
+    <string name="cups">cups: <br/></string>
+    <string name="total_grams">Total grams: <br/></string>
+
+    <string name="choose_from_list">Choose item from list</string>
+    <string name="grams"><br/> grams</string>
+    <string name="week">Week</string>
+    <string name="hours_symbol">h</string>
+    <string name="sec_symbol">sec</string>
+    <string name="no_food_items_in_db_msg">You have not added any food items yet.</string>
+    <string name="edit_activity_title">Edit activity</string>
     <string-array name="goals_measurements_list_labels">
         <item>Goal</item>
         <item>Weight</item>
         <item>Body Mass Index Calculator</item>
         <item>Basal Metabolic Rate &amp; Total Energy Expenditure Calculator</item>
     </string-array>
-
-    <!-- TODO: Create the informational message! About weight management - how to adjust calories and about activity minutes and the intesities -->
     <string-array name="activity_levels">
         <item>Light</item>
         <item>Moderate</item>
         <item>Vigorous</item>
     </string-array>
+
     <string-array name="goal_types">
         <item>Lose weight</item>
         <item>Maintain weight</item>
         <item>Gain weight</item>
     </string-array>
+    <string-array name="frequency_array">
+        <item>Daily</item>
+        <item>Three times per week</item>
+        <item>Twice per week</item>
+        <item>Once per week</item>
+    </string-array>
 
-    <!-- Weight -->
-    <string name="no_weights_in_db">No weights saved</string>
-    <string name="date">Date</string>
-    <string name="add_weight">Add weight</string>
-    <string name="weight_saved_msg">Weight saved successfully!</string>
-    <string name="weight_save_error_msg">Error saving weight, please try again.</string>
+    <!-- Challenge information text -->
+    <string-array name="challenge_info_array">
+        <!-- Eat 400g of fruits and veggies every day -->
+        <item>A healthy diet includes a lot of fruits and veggies, which are the base of each day.
+            The recommendation is 400g, but the more the better.
+            The best is to take advantage of the seasonal fruits and eat fresh produce as much as possible.</item>
+        <!--Include more green veggies in your daily meals -->
+        <item>Colour variety in vegetables is important. Green vegetables are full of iron, so try to eat more of them.</item>
+        <!--Include whole grains instead and starchy foods in your day (potatoes, oats, bread, rice) -->
+        <item>Whole grains and starchy foods are the second most important part of healthy diet.
+            This includes potatoes, bread, rice, oats, etc.
+            They contain a lot of fibre, which is very good for digestion.</item>
+        <!--Limit the intake of cow, pig and sheep meat (instead chicken, turkey, fish) -->
+        <item>Meat should be eaten in moderation and it is better to choose chicken, turkey and fish meat, as they contain unsaturated fats.
+            Cow, pig and sheep meat contain saturated fats, which is bad for our heart and can cause weight gain. </item>
+        <!-- Include carbs as 50% of your total calories-->
+        <item>Carbohydrates are an important diet group. They are divided into sugar, whole grain, starchy foods and fibre.
+            In general, around 50-65% of total calories should come from carbohydrates, keeping in mind that sugar should be limited.
+            On the other hand, starchy foods and whole grains are processed by our bodies longer, therefore keeping us full for longer period of time.
+            This group includes potatoes, bread, rice, oats, peas, beans etc. They also contain a lot of fibre, which is very good for digestion.</item>
+        <!-- Include protein as 30% of your total calories-->
+        <item>Protein is a crucial element of a healthy diet, which, most importantly, is used to build and repair muscles, bones, blood, skin and other tissues.
+            It also strengthens immune system and contributes to growth and regulation of hormones. Protein comes from two sources: animal (meat, fish, dairy and eggs) and plant (soybean, beans, peas, lentils, nuts, legumes and pumpkin seeds).
+            An adult should include protein as 10-35% of total calories. It relies on many factors such, as age, health, activity level and so on.
+            The personal goals relating to weight loss, weight or muscle gain, also have an impact, as protein can improve metabolism and, as already mentioned it is building muscle. </item>
+        <!-- Limit intake of fats to 30% of your total calories-->
+        <item>Cow, pig and sheep meat, as well as butter, cream, cheese, coconut and palm oil should be avoided,
+            whereas, nuts, avocado sunflower and olive oil can be incorporated into daily diet in small portions.</item>
+        <!-- Limit the intake of saturated fats to 10% of your total calories -->
+        <item>Cow, pig and sheep meat contain saturated fats, which is bad for our heart and can cause weight gain.</item>
+        <!--Limit the intake of trans-fats to lower than 1% of your total calories -->
+        <item>Trans-fat can be found in premade meals, frozen pizzas, cookies and pies</item>
+        <!-- Limit the intake of sugar to 10%-->
+        <item>Sugar should not constituted more than 10% of total calories, and for gaining more health, it should be less than 5%, as it causes dental problems,
+            weight gain and influences blood pressure.</item>
+        <!-- Limit the intake of sugar to 5% of your total calories-->
+        <item>Sugar should not constituted more than 10% of total calories, and for gaining more health, it should be less than 5%, as it causes dental problems,
+            weight gain and influences blood pressure.</item>
+        <!--Limit the intake of salt to 5g -->
+        <item>Daily portion of salt should be around 5 grams per day in total.
+            This includes not only kitchen salt but also products like cheese, salty snacks, ham and even bread</item>
+        <!-- Drink 8 cups of water -->
+        <item>Staying hydrated is also very important for human bodies.
+            A common recommendation is to drink 8 cups of water per day.
+            Nonetheless, there is not one specific number of water intake for a person.
+            The water needs depend on many factors, such as the climate we live in, level of physical activity, diet and health conditions.
+            It is important to note that drinking water is not the only source of daily water intake. Food and other fluids also include water and help us in staying hydrated.
+            For example spinach, watermelon and berries contain a lot of water. For hydration indication it is good to observe the color of urine. Light yellow means we are well hydrated, and the darker it gets the more dehydrated we are.
+            However, contrary to the popular belief, clear means we are overhydrated, which may also be dangerous.</item>
+        <!-- Eat withing your calorie goal-->
+        <item>it is important to consume an appropriate number of calories – energy intake should be more and less the same as calorie expenditure, in order to maintain a healthy weight.</item>
+        <!-- Engage in physical activities for at least 150 mins per week-->
+        <item>Physical activity is as important for health as an appropriate diet and should not be overlooked.
+            Everyone should engage in some kind of physical activity regularly, as it improves health by minimizing the risk of diseases such as diabetes and heart and bone diseases.
+            It also contributes to maintaining a healthy weight, while enhancing the condition of heart, lungs, muscles and bones and joints.
+            The recommended level of activity for adults is at least 150 minutes of moderate intensity or 75 minutes of vigorous intensity activities per week.
+            However, doing more gives additional health benefits.
+            It is important to adjust the exercises to our fitness level. If we are only starting, we should do so slowly and build up steadily.
+            Adults over 65 should engage in physical activities that are allowed based on their condition.
+            It is also beneficial for them to work on balance and mobility 3 days per week, in order to reduce falling.
+            The recommended goal of physical activity per day for children is at least 60 minutes of moderate or vigorous activity.
+            Exercises that strengthen bones and muscles should not be dismissed and should be performed at least 3 days per week</item>
+        <!-- Stop smoking-->
+        <item>Smoking can cause cancer, heart and lung diseases,
+            but it is also extremely dangerous to the people around and children especially</item>
+        <!-- Lower your alcohol intake-->
+        <item>Small amounts of alcohol every now and then can be beneficial, as it can lower the chances of heart diseases.
+            However, drinking too much alcohol can lead to many health problems, such as stroke, cancer, hepatitis and depression.</item>
+    </string-array>
+
 </resources>
-
-
